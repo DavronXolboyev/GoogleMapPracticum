@@ -1,8 +1,8 @@
 package uz.doxmobile.google_practicum
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -34,13 +34,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        startService(
-            Intent(applicationContext, BackgroundService::class.java).apply {
-                action = BackgroundService.ACTION_START
-            }
-        )
         if (!hasLocationPermission()) {
             requestLocationPermission()
+        } else {
+            startServiceFunc()
         }
         marker = MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.taxi))
 
@@ -48,14 +45,22 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
         initListeners()
-//        observeLocation()
+        observeLocation()
+    }
+
+    private fun startServiceFunc() {
+        startService(
+            Intent(applicationContext, BackgroundService::class.java).apply {
+                action = BackgroundService.ACTION_START
+            }
+        )
     }
 
     private fun observeLocation() {
         lifecycleScope.launch {
             viewModel.location.filterNotNull().collectLatest {
-                Log.d("TAG", "observeLocation: $it")
-                addMarker(LatLng(it.latitude, it.longitude))
+                position = LatLng(it.latitude, it.longitude)
+                addMarker(position)
             }
         }
     }
@@ -71,12 +76,27 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         )
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startServiceFunc()
+        }
+    }
+
     private fun initListeners() {
         binding.ivZoomIn.setOnClickListener {
             mMap?.animateCamera(CameraUpdateFactory.zoomIn())
         }
         binding.ivZoomOut.setOnClickListener {
             mMap?.animateCamera(CameraUpdateFactory.zoomOut())
+        }
+
+        binding.ivGps.setOnClickListener {
+            mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15f))
         }
     }
 
@@ -85,17 +105,26 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap?.addMarker(
             marker
                 .position(position)
-                .title("Shaxriston")
+                .title("Me")
                 .anchor(0.5f, 0.5f)
                 .rotation(rotate)
                 .flat(true)
         )
+        mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 17f))
     }
 
     override fun onMapReady(p0: GoogleMap) {
         mMap = p0
         addMarker(position)
-        mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15f))
         mMap?.setPadding(0, 150, 0, 0)
+    }
+
+    override fun onDestroy() {
+        startService(
+            Intent(applicationContext, BackgroundService::class.java).apply {
+                action = BackgroundService.ACTION_STOP
+            }
+        )
+        super.onDestroy()
     }
 }

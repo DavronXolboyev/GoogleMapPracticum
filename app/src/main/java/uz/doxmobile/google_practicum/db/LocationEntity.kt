@@ -7,7 +7,8 @@ import org.threeten.bp.LocalDateTime
 @Entity(tableName = "location")
 data class LocationEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = -1,
+    val id: Long = 0,
     val lat: Double,
     val lng: Double,
+    val localDateTime: LocalDateTime
 )

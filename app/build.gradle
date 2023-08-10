@@ -69,7 +69,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.6.1"
 
     // implementaion threeten local date time
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.6'
+    implementation 'org.threeten:threetenbp:1.6.8'
 
     // implementaion location service
     implementation 'com.google.android.gms:play-services-location:21.0.1'

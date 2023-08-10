@@ -11,4 +11,5 @@ data class Location(
     val id: Long = -1,
     val latitude: Double,
     val longitude: Double,
+    val localDateTime: LocalDateTime = LocalDateTime.now()
 )

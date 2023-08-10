@@ -12,6 +12,7 @@ fun Location.toEntity(): LocationEntity {
     return LocationEntity(
         lat = latitude,
         lng = longitude,
+        localDateTime = localDateTime
     )
 }
 
@@ -20,6 +21,7 @@ fun LocationEntity.toModel(): Location {
         id = id,
         latitude = lat,
         longitude = lng,
+        localDateTime = localDateTime
     )
 }
 

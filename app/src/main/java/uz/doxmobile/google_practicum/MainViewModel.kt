@@ -2,6 +2,7 @@ package uz.doxmobile.google_practicum
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.distinctUntilChanged
 import uz.doxmobile.google_practicum.usecase.GetLocationUseCase
 import javax.inject.Inject
 
@@ -15,5 +16,6 @@ class MainViewModel @Inject constructor(private val getLocationUseCase: GetLocat
     ViewModel() {
 
     val location = getLocationUseCase.getLastLocation()
+        .distinctUntilChanged { old, new -> old?.latitude == new?.latitude && old?.longitude == new?.longitude }
 
 }

@@ -66,7 +66,6 @@ class BackgroundService : Service() {
                     longitude = lng,
                 )
 
-                val ll = LocalDateTime.now()
                 val newLocationNotification = notification.setContentText(
                     "Location : ($lat, $lng)"
                 )
