@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <fragment
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle_white"
+        android:padding="12dp"
+        android:src="@drawable/baseline_menu_24"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_rectangle_12dp"
+        android:checkedButton="@id/rb_free"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@id/iv_notifications"
+        app:layout_constraintStart_toEndOf="@id/iv_menu"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rb_free"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_selector1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Cвободен"
+            android:textAllCaps="true"
+            android:textColor="@drawable/rb_text_color"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/rb_busy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_selector2"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Занят"
+            android:textAllCaps="true"
+            android:textColor="@drawable/rb_text_color"
+            android:textStyle="bold" />
+
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/iv_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/circle_white"
+        android:padding="12dp"
+        android:src="@drawable/baseline_notifications_24"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+    <TextView
+        android:id="@+id/tv_speed"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/circle_black_white"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_rocket"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Заказы"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/tv_speed"
+        app:layout_constraintStart_toStartOf="@id/tv_speed"
+        app:layout_constraintTop_toBottomOf="@id/tv_speed" />
+
+    <ImageView
+        android:id="@+id/iv_rocket"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/circle_black_white"
+        android:gravity="center"
+        android:padding="16dp"
+        android:src="@drawable/baseline_rocket_launch_24"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_speed"
+        app:layout_constraintEnd_toStartOf="@id/iv_tariff"
+        app:layout_constraintStart_toEndOf="@id/tv_speed"
+        app:layout_constraintTop_toTopOf="@id/tv_speed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Бордюр"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/iv_rocket"
+        app:layout_constraintStart_toStartOf="@id/iv_rocket"
+        app:layout_constraintTop_toBottomOf="@id/iv_rocket" />
+
+    <ImageView
+        android:id="@+id/iv_tariff"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/circle_black_white"
+        android:gravity="center"
+        android:padding="16dp"
+        android:src="@drawable/baseline_view_stream_24"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_speed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_rocket"
+        app:layout_constraintTop_toTopOf="@id/tv_speed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Тарифы"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/iv_tariff"
+        app:layout_constraintStart_toStartOf="@id/iv_tariff"
+        app:layout_constraintTop_toBottomOf="@id/iv_tariff" />
+
+    <ImageView
+        android:id="@+id/iv_zoom_in"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/circle_white"
+        android:padding="4dp"
+        android:src="@drawable/baseline_add_24"
+        app:layout_constraintBottom_toTopOf="@id/iv_tariff"
+        app:layout_constraintEnd_toEndOf="@id/iv_notifications"
+        app:layout_constraintTop_toBottomOf="@id/iv_notifications" />
+
+    <ImageView
+        android:id="@+id/iv_zoom_out"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circle_white"
+        android:padding="4dp"
+        android:src="@drawable/baseline_remove_24"
+        app:layout_constraintEnd_toEndOf="@id/iv_zoom_in"
+        app:layout_constraintTop_toBottomOf="@id/iv_zoom_in" />
+
+    <ImageView
+        android:id="@+id/iv_gps"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/circle_white"
+        android:padding="8dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/baseline_near_me_24"
+        app:layout_constraintEnd_toEndOf="@id/iv_zoom_out"
+        app:layout_constraintTop_toBottomOf="@id/iv_zoom_out" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
